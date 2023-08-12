@@ -22,3 +22,19 @@
     margin-left: 10px;
     margin-top: 20px;
 }
+
+.top {
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.left {
+    float: left;
+    margin-top: 17px;
+}
+
+.brand {
+    height: 64px;
+    padding-right: 10px;
+    /* filter: invert(46%) sepia(99%) saturate(1449%) hue-rotate(176deg) brightness(100%) contrast(91%); */
+}
