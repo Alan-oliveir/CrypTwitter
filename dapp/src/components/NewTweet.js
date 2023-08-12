@@ -1,10 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function NewTweet() {
   const [text, setText] = useState("");
   const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    const wallet = localStorage.getItem("wallet");
+    if (!wallet) push("/");
+  }, []);
 
   function btnPublishClick() {
     alert(text);
