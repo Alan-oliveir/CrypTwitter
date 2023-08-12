@@ -1,10 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+
+import { addTweet } from "@/services/Web3Service";
 
 export default function NewTweet() {
   const [text, setText] = useState("");
   const [message, setMessage] = useState("");
+  const { push } = useRouter();
 
   useEffect(() => {
     const wallet = localStorage.getItem("wallet");
@@ -12,17 +16,16 @@ export default function NewTweet() {
   }, []);
 
   function btnPublishClick() {
-    alert(text);
-    // setMessage("Enviando seu tweet para a blockchain...aguarde...");
-    // addTweet(text)
-    //   .then((result) => {
-    //      setText("");
-    //      setMessage("Tweet foi enviado. Aguarde um minuto para atualizar.");
-    //    })
-    //    .catch((err) => {
-    //       setMessage(err.message);
-    //       console.error(err);
-    //     });
+    setMessage("Enviando seu tweet para a blockchain...aguarde...");
+    addTweet(text)
+      .then((result) => {
+        setText("");
+        setMessage("Tweet foi enviado. Aguarde um minuto para atualizar.");
+      })
+      .catch((err) => {
+        setMessage(err.message);
+        console.error(err);
+      });
   }
 
   return (
