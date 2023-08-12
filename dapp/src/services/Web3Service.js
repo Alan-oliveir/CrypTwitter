@@ -34,3 +34,13 @@ export async function changeUsername(newName) {
   const contract = getContract();
   return contract.methods.changeUsername(newName).send();
 }
+
+export async function getLastTweets(page) {
+  const contract = getContract();
+  const tweets = await contract.methods.getLastTweets(page).call();
+  return tweets
+    .map((t) => {
+      return { ...t };
+    })
+    .filter((t) => t.text !== "");
+}
