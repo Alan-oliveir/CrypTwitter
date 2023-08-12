@@ -1,6 +1,13 @@
 # CrypTwitter
 - Projeto desenvolvido durante evento Web3 Week
 - Programação de aplicações para blockchain e Web3
+
+### WEB3
+A Web3 usa da tecnologia blockchain para armazenamento, moedas digitais e carteiras para pagamentos e dos smart contracts para processamento de aplicações dos mais variados tipos.
+As aplicações web3 são mais abertas, descentralizadas e globais.
+
+### Projeto
+CrypTwitter é uma aplicação descentralizada que simula as funcionalidades de um "mini-twitter" usando tecnologias da web3.
 ___
 ## Layout 
 
