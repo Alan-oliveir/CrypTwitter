@@ -9,11 +9,15 @@ import { useState, useEffect } from "react";
 
 export default function Timeline() {
   const [tweets, setTweets] = useState([]);
+  const [page, setPage] = useState(1);
 
   async function loadTweets(page = 1) {
     try {
       const results = await getLastTweets(page);
-      setTweets(results);
+      if (page > 1) {
+        tweets.push(...results);
+        setTweets(tweets.reverse());
+      } else setTweets(results.reverse());
     } catch (err) {
       console.error(err);
       alert(err.message);
@@ -21,8 +25,12 @@ export default function Timeline() {
   }
 
   useEffect(() => {
-    loadTweets(1);
-  }, []);
+    loadTweets(page);
+  }, [page]);
+
+  function btnLoadMoreClick() {
+    setPage(page + 1);
+  }
 
   return (
     <>
@@ -36,19 +44,23 @@ export default function Timeline() {
         <div className="row">
           <div className="layout">
             <NewTweet />
-
             {tweets && tweets.length ? (
               tweets.map((t) => <Tweet key={Number(t.timestamp)} data={t} />)
             ) : (
               <p>Nada para ver aqui. Faça o primeiro tweet. </p>
             )}
-            <div className="center">
-              <input
-                type="button"
-                className="btn btn-primary"
-                value="Mais Tweets"
-              />
-            </div>
+            {tweets.length > 0 && tweets.length % 10 === 0 ? (
+              <div className="center">
+                <input
+                  type="button"
+                  className="btn btn-primary"
+                  value="Mais Tweets"
+                  onClick={btnLoadMoreClick}
+                />
+              </div>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </div>
