@@ -8,26 +8,21 @@ import { getLastTweets } from "@/services/Web3Service";
 import { useState, useEffect } from "react";
 
 export default function Timeline() {
+  const [tweets, setTweets] = useState([]);
 
-    async function loadTweets(page = 1) {
-        try {
-            const results = await getLastTweets(page);
-            if (page > 1) {
-                tweets.push(...results);
-                setTweets(tweets.reverse());
-            }
-            else
-                setTweets(results.reverse());
-        }
-        catch (err) {
-            console.error(err);
-            alert(err.message);
-        }
+  async function loadTweets(page = 1) {
+    try {
+      const results = await getLastTweets(page);
+      setTweets(results);
+    } catch (err) {
+      console.error(err);
+      alert(err.message);
     }
+  }
 
-    useEffect(() => {
-        loadTweets(page);
-    }, [page])
+  useEffect(() => {
+    loadTweets(1);
+  }, []);
 
   return (
     <>
@@ -41,7 +36,12 @@ export default function Timeline() {
         <div className="row">
           <div className="layout">
             <NewTweet />
-            <Tweet data={} />
+
+            {tweets && tweets.length ? (
+              tweets.map((t) => <Tweet key={Number(t.timestamp)} data={t} />)
+            ) : (
+              <p>Nada para ver aqui. Faça o primeiro tweet. </p>
+            )}
             <div className="center">
               <input
                 type="button"
