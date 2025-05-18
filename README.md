@@ -22,6 +22,7 @@ ___
 - JavaScript
 - HTML
 - CSS
+- Solidity
 
 ___
 ## Agradecimentos
